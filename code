@@ -1,0 +1,14 @@
+#image loading then detecting by a classifier object and making a rectangle around it
+import cv2
+face=cv2.CascadeClassifier("C:\\Users\\ADNAN\\AppData\\Local\Programs\\Python\\Python36-32\\Lib\\site-packages\\cv2\\data\\haarcascade_frontalface_default.xml")
+img=cv2.imread('F:\elon.jpg',1)
+#making imgage gray scale
+grayimg=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+#search co ordinates of the image
+faces=face.detectMultiScale(grayimg,scaleFactor=1.05,minNeighbors=5)
+for x,y,w,h in faces:
+    img=cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),3)
+resize=cv2.resize(img,(int(img.shape[1]/5),int(img.shape[0]/5)))
+cv2.imshow("gray",resize)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
